@@ -11,7 +11,8 @@
         <a href="#">
           {{ getUserById(thread.userId).name }}
         </a>
-        {{ thread.publishedAt }}
+        &nbsp;
+        <app-date :timestamp="thread.publishedAt" />
       </p>
     </div>
 
@@ -29,7 +30,7 @@
           <a href="#"> {{ getUserById(thread.userId).name }} </a>
         </p>
         <p class="text-xsmall text-faded">
-          {{ thread.publishedAt }}
+          <app-date :timestamp="thread.publishedAt" />
         </p>
       </div>
     </div>
@@ -38,6 +39,7 @@
 
 <script>
   import data from '@/data.json'
+
   export default {
     props: {
       thread: {
