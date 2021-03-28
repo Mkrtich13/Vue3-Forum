@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import data from '@/data.json'
+  import { useStore } from 'vuex'
 
   export default {
     name: 'PostList',
@@ -44,8 +44,9 @@
       }
     },
     setup() {
+      const store = useStore()
       const getUserById = userId => {
-        return data.users.find(user => user.id === userId)
+        return store.state.users.find(user => user.id === userId)
       }
 
       return {

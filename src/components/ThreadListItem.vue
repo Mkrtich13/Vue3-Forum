@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import data from '@/data.json'
+  import { useStore } from 'vuex'
 
   export default {
     props: {
@@ -48,12 +48,14 @@
       }
     },
     setup() {
+      const store = useStore()
+
       const getUserById = userId => {
-        return data.users.find(user => user.id === userId)
+        return store.state.users.find(user => user.id === userId)
       }
 
       const getPostById = postId => {
-        return data.posts.find(post => post.id === postId)
+        return store.state.posts.find(post => post.id === postId)
       }
 
       return {

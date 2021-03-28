@@ -8,11 +8,10 @@
 </template>
 
 <script>
-  import { computed, reactive } from 'vue'
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
   import PostList from '@/components/PostList'
   import PostEditor from '@/components/PostEditor'
-
-  import data from '@/data.json'
 
   export default {
     name: 'ThreadShow',
@@ -27,25 +26,27 @@
       }
     },
     setup(props) {
-      const posts = reactive(data.posts)
-      const threads = reactive(data.threads)
+      const store = useStore()
+
+      const posts = computed(() => store.state.posts)
+      const threads = computed(() => store.state.threads)
 
       const thread = computed(() => {
-        return threads.find(thread => thread.id === props.id)
+        return threads.value.find(thread => thread.id === props.id)
       })
 
       const threadPosts = computed(() => {
-        return posts.filter(post => post.threadId === props.id)
+        return posts.value.filter(post => post.threadId === props.id)
       })
 
       const onAddPost = eventData => {
         const post = {
           ...eventData.post,
-          threadId: props.id
+          threadId: props.id,
+          publishedAt: Math.floor(Date.now() / 1000)
         }
 
-        posts.push(post)
-        thread.value.posts.push(post.id)
+        store.dispatch('createPost', post)
       }
 
       return {

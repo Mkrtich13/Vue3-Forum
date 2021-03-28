@@ -5,8 +5,8 @@
 
 <script>
   import { computed } from 'vue'
+  import { useStore } from 'vuex'
   import ForumList from '@/components/ForumList'
-  import data from '@/data.json'
 
   export default {
     components: {
@@ -19,12 +19,14 @@
       }
     },
     setup(props) {
+      const store = useStore()
+
       const category = computed(() => {
-        return data.categories.find(category => category.id === props.id)
+        return store.state.categories.find(category => category.id === props.id)
       })
 
       const forums = computed(() => {
-        return data.forums.filter(
+        return store.state.forums.filter(
           forum => forum.categoryId === category.value.id
         )
       })

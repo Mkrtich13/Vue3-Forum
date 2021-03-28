@@ -4,16 +4,18 @@
 </template>
 
 <script>
-  import { reactive } from 'vue'
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
   import CategoryList from '@/components/CategoryList'
-  import data from '@/data.json'
 
   export default {
     components: {
       CategoryList
     },
     setup() {
-      const categories = reactive(data.categories)
+      const store = useStore()
+
+      const categories = computed(() => store.state.categories)
 
       return {
         categories
