@@ -1,22 +1,22 @@
 <template>
   <h1>Welcome to forums</h1>
-  <forum-list :forums="forums" />
+  <category-list :categories="categories" />
 </template>
 
 <script>
   import { reactive } from 'vue'
-  import ForumList from '@/components/ForumList'
+  import CategoryList from '@/components/CategoryList'
   import data from '@/data.json'
 
   export default {
     components: {
-      ForumList
+      CategoryList
     },
     setup() {
-      const forums = reactive(data.forums)
+      const categories = reactive(data.categories)
 
       return {
-        forums
+        categories
       }
     }
   }
