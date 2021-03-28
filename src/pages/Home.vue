@@ -1,22 +1,22 @@
 <template>
-  <h1>Welcome to the forum</h1>
-  <thread-list :threads="threads" />
+  <h1>Welcome to forums</h1>
+  <forum-list :forums="forums" />
 </template>
 
 <script>
   import { reactive } from 'vue'
-  import ThreadList from '@/components/ThreadList'
+  import ForumList from '@/components/ForumList'
   import data from '@/data.json'
 
   export default {
     components: {
-      ThreadList
+      ForumList
     },
     setup() {
-      const threads = reactive(data.threads)
+      const forums = reactive(data.forums)
 
       return {
-        threads
+        forums
       }
     }
   }
